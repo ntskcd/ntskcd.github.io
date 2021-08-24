@@ -1,0 +1,230 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WeatherHome.aspx.cs" Inherits="Web123.WeatherHome" EnableEventValidation="false" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>報乎哩災-智能觀測站</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel='stylesheet' href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
+    <style>
+        body {
+            font-family: 華康正顏楷體W5;
+        }
+
+        hr {
+            height: 3px;
+            width: 70px;
+            text-align: center;
+            position: relative;
+            background: rgba(0,0,0,0.6);
+            margin: 0 auto;
+            margin-bottom: 20px;
+            border: 0;
+        }
+
+        #header {
+        }
+
+            #header h1 {
+            }
+
+            #header h2 {
+            }
+
+        .header-class {
+            min-height: 100vh;
+            background-image: url(https://images.unsplash.com/photo-1519122295308-bdb40916b529?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80);
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+
+        #info {
+        }
+
+        .info-class {
+            background-image: url(https://images.unsplash.com/photo-1501419737817-eadda6b445e3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=968&q=80);
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+
+        #info h2 {
+        }
+
+        #info h3 {
+        }
+
+        #info p {
+            text-align: justify;
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            line-height: 24px;
+        }
+
+        #about {
+        }
+
+        .about-class {
+            background-image: url(https://images.unsplash.com/photo-1523002010469-ea85cb48674b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+
+        #about p {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            line-height: 24px;
+        }
+
+        #about h4 {
+        }
+
+        #concact {
+            margin-left: 0;
+        }
+
+            #concact p, h3 {
+            }
+
+        .concact-class {
+            background-image: url(img/farm.png);
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+
+        #concact h3 {
+            margin-bottom: 20px;
+        }
+
+        #contact .contact-item {
+            margin: 20px 0 40px 0;
+        }
+
+        .footer-class {
+            background-image: url(https://images.unsplash.com/photo-1472190649224-495422e1b602?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80);
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body>
+    <nav id="navtop" class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: rgba(0%,0%,0%,0.9)">
+        <a class="navbar-brand text-white" href="#" style="font-size: 35px">高科智能觀測站</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link active" href="#" style="font-size: 22px">首頁 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="WeatherStation.aspx" style="font-size: 22px">基本監控資料</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <header class="header-class d-flex justify-content-center align-items-center">
+        <div class="text-center text-white">
+            <h1 style="font-size:70px">歡迎使用高科智能觀測站</h1>
+            <h2>科技物聯網，遠端監控功能</h2>
+            <div class="mt-3">
+                <a href="#info" class="btn btn-outline-light" style="font-size:25px" >觀看更多</a>
+            </div>
+        </div>
+    </header>
+    <section id="info" class="info-class py-4">
+        <div class="container">
+            <h2 class="text-center">關於我們</h2>
+            <p class="text-center">我們專題的發想過程及提供的服務</p>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <img class="img-fluid" src="https://images.zi.org.tw/popular888/2019/03/06061425/1551824065-736a2a2a5dfab1ee224b074b5e729f9a.jpg" />
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <h3>專題發想過程</h3>
+                    <p>
+                        &nbsp;&nbsp;水產養殖所產出的魚蝦貝類在供應臺灣食品上扮演著重要的角色，但目前在水產養殖的領域裡出現了人口老化及極端氣候帶來的災損日益嚴重的問題，因此本專題希望藉由報乎哩災-智能觀測站來協助水產養殖業管理養殖場域，以此來提升魚蝦貝類的存活率，並改善水產養殖業人力不足的問題。
+                    </p>
+                    <p>
+                        &nbsp;&nbsp;本專題除了可透過酸鹼值、溫度、含氧量等感測器來感測養殖場域的情況，也可利用雨量計來了解目前的降雨情況及水位高度，並將感測出來的資料蒐集後，回傳給使用者觀看，幫助使用者更輕鬆地了解目前養殖場域的狀況，並針對偏離正常值的數據先行啟動應變裝置，以降低災害帶來的損失。本專題結合物聯網的概念，採擷相關環境數據，協助使用者對養殖場域進行監控，並透過觀察環境數據，培育出最適合魚蝦貝類生長的環境。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about-class py-5">
+        <div class="container">
+            <h2 class="text-center">提供的服務</h2>
+            <hr />
+            <p class="text-center">使用下列幾項功能呈現高科智能觀測站</p>
+            <div class="row">
+                <div class="col-md-4 d-flex">
+                    <i class="fas fa-wind mr-3" style='font-size: 36px'></i>
+                    <div>
+                        <h4>風向/風速感測功能</h4>
+                        <p>使用風向/風速感測器感測風向及風速，透過7697讀取類比信號再轉換成風向角度/風速(m/s)，提供準確的風向和風速</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <i class="fas fa-water mr-3" style='font-size: 36px'></i>
+                    <div>
+                        <h4>水溫感測功能</h4>
+                        <p>使用水溫感測器感測水溫，透過7697讀取數位信號再轉換成水溫，提供準確的水溫。</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <i class="fas fa-temperature-low mr-3" style='font-size: 36px'></i>
+                    <div>
+                        <h4>溫/濕度感測功能</h4>
+                        <p>使用溫/濕度感測器感測溫度及濕度，透過7697讀取數位信號在轉換成溫/濕度，提供準確的溫/濕度數值。</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <i class='fas fa-info-circle mr-3' style='font-size: 36px'></i>
+                    <div>
+                        <h4>含氧量感測功能</h4>
+                        <p>使用溶氧量感測器感測含氧量，透過7697讀取數位信號在轉換成含氧量，提供準確的含氧量。</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <i class="fas fa-bong mr-3" style='font-size: 36px'></i>
+                    <div>
+                        <h4>PH值感測功能</h4>
+                        <p>使用PH值感測器感測PH值，透過7697讀取類比信號在換算成PH值，提供準確的PH值。</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <i class="fas fa-cloud-rain mr-3" style='font-size: 36px'></i>
+                    <div>
+                        <h4>雨量感測功能</h4>
+                        <p>使用超音波感測器搭配雨量筒，透過7697讀取超音波訊號在換算成深度，計算出雨量的多寡。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="footer" class="footer-class py-5">
+        <div class="container">
+            <div class="text-center text-dark">
+                <p>&copy; 2019 Nkust. Designed by <i class='fas fa-arrow-alt-circle-up ml-3' style='font-size: 36px'></i></p>
+
+            </div>
+        </div>
+    </section>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+</html>
