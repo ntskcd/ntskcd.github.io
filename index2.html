@@ -1,0 +1,273 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WeatherStation.aspx.cs" Inherits="Web123.WeatherStation" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>氣象觀測系統</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f7f8f9;
+            font-family: 微軟正黑體;
+        }
+
+        .card {
+            margin-top: 80px;
+            background-color: #ffffff;
+            border: 1px solid rgba(0, 34, 51, 0.1);
+            box-shadow: 2px 4px 10px 0 rgba(0, 34, 51, 0.05), 2px 4px 10px 0 rgba(0, 34, 51, 0.05);
+            border-radius: 0.15rem;
+        }
+
+        /* Tabs Card */
+
+        .tab-card {
+            border: 1px solid #eee;
+        }
+
+        .tab-card-header {
+            background: none;
+        }
+            /* Default mode */
+            .tab-card-header > .nav-tabs {
+                border: none;
+                margin: 0px;
+            }
+
+                .tab-card-header > .nav-tabs > li {
+                    margin-right: 2px;
+                }
+
+                    .tab-card-header > .nav-tabs > li > a {
+                        border: 0;
+                        border-bottom: 2px solid transparent;
+                        margin-right: 0;
+                        color: #737373;
+                        padding: 2px 15px;
+                    }
+
+                        .tab-card-header > .nav-tabs > li > a.show {
+                            border-bottom: 2px solid #007bff;
+                            color: #007bff;
+                        }
+
+                        .tab-card-header > .nav-tabs > li > a:hover {
+                            color: #007bff;
+                        }
+
+            .tab-card-header > .tab-content {
+                padding-bottom: 0;
+            }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+      <span style="font-family: 華康正顏楷體W5;">  <nav id="navtop" class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: rgba(0%,0%,0%,0.9)">
+            <a class="navbar-brand text-white" href="#" style="font-size:35px">智能觀測站</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="WeatherHome.aspx" style="font-size:22px">首頁 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#weathermenu" style="font-size:22px">基本監控資料</a>
+                    </li>
+                </ul>
+            </div>
+        </nav></span>
+        <div id="weathermenu" class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-md-4"></div>
+                <div class="col-xs-12 col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" id="mytab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link show active" id="weather-tab" data-toggle="tab" href="#weather" role="tab" aria-controls="weather" aria-selected="true">基本監控狀況</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link tab-content" id="weatherall-tab" data-toggle="tab" href="#weatherall" role="tab" aria-controls="weatherall" aria-selected="false">歷史紀錄</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="weatherexplain-tab" data-toggle="tab" href="#weatherexplain" role="tab" aria-controls="weatherall" aria-selected="false">觀測項目說明</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active " id="weather" role="tabpanel" aria-labelledby="weather-tab">
+                                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CaptionAlign="Top" CellPadding="4" EmptyDataText="No Data" ForeColor="#333333" GridLines="None" PageSize="5" CssClass="table table-bordered">
+                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                                    <Columns>
+                                        <asp:BoundField DataField="waterlevel" HeaderText="水位">
+                                            <FooterStyle Width="40px" />
+                                            <HeaderStyle HorizontalAlign="Left" Width="80px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="windirection" HeaderText="風向">
+                                            <FooterStyle Width="40px" />
+                                            <HeaderStyle HorizontalAlign="Left" Width="80px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="windspeed" HeaderText="風力(m/s)">
+                                            <FooterStyle Width="40px" />
+                                            <HeaderStyle HorizontalAlign="Left" Width="80px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="soil" HeaderText="土壤濕度">
+                                            <FooterStyle Width="40px" />
+                                            <HeaderStyle HorizontalAlign="Left" Width="100px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Oxygen" HeaderText="溶氧量">
+                                            <HeaderStyle Width="80px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Phvaule" HeaderText="PH值">
+                                            <HeaderStyle Width="80px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Temperature" HeaderText="水溫">
+                                            <HeaderStyle Width="80px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Datatime" HeaderText="紀錄時間">
+                                            <HeaderStyle HorizontalAlign="Left" Width="100px" />
+                                            <ItemStyle Width="80px" />
+                                        </asp:BoundField>
+                                    </Columns>
+                                    <EditRowStyle BorderStyle="NotSet" BorderColor="#CCCCCC" BackColor="#999999" />
+                                    <FooterStyle BackColor="#5D7B9D" ForeColor="White" BorderStyle="NotSet" Font-Bold="True" />
+                                    <HeaderStyle BorderStyle="Dotted" Font-Bold="True" ForeColor="White" BackColor="#5D7B9D" BorderColor="#F0F0F0" BorderWidth="1" />
+                                    <PagerStyle ForeColor="White" HorizontalAlign="Center" BackColor="#284775" />
+                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" BorderStyle="NotSet" BorderColor="#CCCCCC" BorderWidth="1" />
+                                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                                    <SortedAscendingCellStyle BackColor="#E9E7E2" BorderStyle="NotSet" />
+                                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                                </asp:GridView>
+                            </div>
+                            <div class="tab-pane fade " id="weatherall" role="tabpanel" aria-labelledby="weather-tab">
+                                <asp:GridView ID="GridView2" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CaptionAlign="Top" CellPadding="2" EmptyDataText="No Data" OnPageIndexChanging="GridView2_PageIndexChanging" OnRowDataBound="GridView2_RowDataBound" ForeColor="#333333" GridLines="None" CssClass="table table-bordered table-hover">
+                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                                    <Columns>
+                                        <asp:BoundField DataField="id" HeaderText="筆數">
+                                            <ControlStyle BorderStyle="Dashed" />
+                                            <FooterStyle Width="40px" />
+                                            <HeaderStyle Font-Strikeout="False" HorizontalAlign="Left" Width="80px" Height="40px" />
+                                            <ItemStyle Height="25px" Width="40px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="waterlevel" HeaderText="水位">
+                                            <FooterStyle Width="40px" />
+                                            <HeaderStyle HorizontalAlign="Left" Width="80px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="windirection" HeaderText="風向">
+                                            <FooterStyle Width="40px" />
+                                            <HeaderStyle HorizontalAlign="Left" Width="80px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="windspeed" HeaderText="風力">
+                                            <FooterStyle Width="40px" />
+                                            <HeaderStyle HorizontalAlign="Left" Width="80px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="soil" HeaderText="土壤濕度">
+                                            <FooterStyle Width="40px" />
+                                            <HeaderStyle HorizontalAlign="Left" Width="80px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Oxygen" HeaderText="溶氧量">
+                                            <HeaderStyle Width="80px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Phvaule" HeaderText="PH值">
+                                            <HeaderStyle Width="80px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Temperature" HeaderText="水溫">
+                                            <HeaderStyle Width="80px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Datatime" HeaderText="紀錄時間">
+                                            <HeaderStyle HorizontalAlign="Left" Width="100px" />
+                                            <ItemStyle Width="80px" />
+                                        </asp:BoundField>
+                                    </Columns>
+                                    <EditRowStyle BorderStyle="NotSet" BorderColor="#CCCCCC" BackColor="#999999" />
+                                    <FooterStyle BackColor="#5D7B9D" ForeColor="White" BorderStyle="NotSet" Font-Bold="True" />
+                                    <HeaderStyle BorderStyle="Dotted" Font-Bold="True" ForeColor="White" BackColor="#5D7B9D" BorderColor="#F0F0F0" BorderWidth="1" />
+                                    <PagerStyle ForeColor="White" HorizontalAlign="Center" BackColor="#284775" />
+                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" BorderStyle="NotSet" BorderColor="#CCCCCC" BorderWidth="1" />
+                                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                                    <SortedAscendingCellStyle BackColor="#E9E7E2" BorderStyle="NotSet" />
+                                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                                </asp:GridView>
+
+                            </div>
+                            <div class="tab-pane fade " id="weatherexplain" role="tabpanel" aria-labelledby="weather-tab">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr class="bg-info">
+                                            <th style='min-width: 120px;'>觀測項目</th>
+                                            <th>說明</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table">
+                                        <tr>
+                                            <td>溫度</td>
+                                            <td>氣溫是以溫度計量測之，指在距地面1.25 - 2.00公尺間流動，而不受太陽直達輻射影響之大氣溫度而言。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>雨量</td>
+                                            <td>指在一定時間內之降水，儲積在一平面上，在無蒸發、流失或滲透等損耗情況下，其儲積量之深度謂之。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>相對濕度</td>
+                                            <td>即空氣中實際含有之水氣量，與相同溫度下可含最大水氣 量之百分比。空氣在完全飽和狀態時相對濕度為100％；如空氣中所含水氣量僅為當時溫度下所含最大水氣量之一半時，則相對濕度為 50％。對人體而言，空氣之相對濕度在 40～60％間時，令人最感舒適。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>風向</td>
+                                            <td>氣象觀測的地面風是指離地面以上約10公尺高度的風。風向是指風吹來的方向，一般用16個方位或360° 表示。風向或風速易隨時在變動，故必須觀測瞬間值及平均值。氣象觀測所稱平均風向風速，係指正時前10分鐘之平均。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>風力(級)m/s</td>
+                                            <td>風速為單位時間內空氣移動之距離，單位為公尺/秒，風速小於0.3m/s時，風向為無風。風之強弱程度，通常用風力等級來表示，而風力的等級，可由地面或海面物體被風吹動之情形加以估計之。目前國際通用之風力估計，係以蒲福風級為標準。實際風速與蒲福風級之經驗關係式為：Ｖ= 0.836 * (Ｂ ^ (3/2))
+                                            Ｂ為蒲福風級數　　Ｖ為風速（單位：公尺／秒）
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>陣風</td>
+                                            <td>10分鐘平均風速和在同時出現之最大瞬間風速之差。在5~10 m/s者為小陣風，大於10 m/s者為大陣風。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>土壤濕度</td>
+                                            <td>用於土壤的溼度檢測有助於讓使用者知道土壤狀態是否適合澆水。模組上的藍色可變電阻可以調整靈敏度。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>水溫</td>
+                                            <td>感測器採用DS18B20單匯流排數位輸出，並通過溫度感測器LM35邊上的電位器進行微調校準。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>溶解氧</td>
+                                            <td>溶解氧迴路以Mg/L的形式將數據返回到兩位有效數字。讀數可以取決於溫度或電導率，也可以與溫度或電導率無關，探頭可以在淡水、鹽水中正常工作。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>PH值</td>
+                                            <td>感測器的電極採用玻璃電極和參比電極組合在一起的塑殼不可填充是複合電極，用來測量水溶液中的氫離子活度，運算出PH值。</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+    </form>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</html>
